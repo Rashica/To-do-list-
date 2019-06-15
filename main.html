@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo list</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center display-2">Todo list</h1>
+        <p class="text-center display-4">Organizujte svoje vreme</p>
+        <div class="row">
+            <form id="form" class="col-8 mx-auto">
+                <div class="input-group">
+                    <input id="input" type="input" class="form-control" placeholder="Novi zadatak je..."><span><button 
+                       id="btn" type="button" class="btn btn-info">Dodaj</button></span>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <ul id="list" class="col-8 mx-auto">
+                <li>Zavrsiti projekat<input type="checkbox" aria-label="Checkbox for following text input"></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            var form = document.getElementById("form");
+            var input = document.getElementById("input");
+            var btn = document.getElementById("btn");
+            var list = document.getElementById("list");
+            var id=1;
+
+            btn.addEventListener("click", addTodo);
+            list.addEventListener("click", checkedTodo);
+
+            function addTodo() {
+                if(input.value === "") {
+                    window.alert("Moras da uneses zadatak!");
+                }
+                else {
+                    var text = input.value;
+                    var item = `<li id="li.${id}">${text}<input id="box.${id}" class="checkboxes" type="checkbox"></li>`;
+                    list.insertAdjacentHTML('beforeend', item);
+                    id++;
+                    form.reset();
+                }
+            }
+
+            function checkedTodo(event) {
+               var element = event.target;
+               if (element.type === "checkbox") {
+                   element.parentNode.style.textDecoration = "line-through";
+               } 
+            }
+        }
+    </script>
+
+</body>
+</html>
